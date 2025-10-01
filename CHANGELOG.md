@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.2] - 2025-10-01
+
+### Fixes
+
+- Corriger les problèmes de password, via password_hash en register et password_verify en login user
+
 ## [0.2.1] - 2025-10-01
 
 ### Fixes
