@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.6] - 2025-10-01
+
+### Fixes
+
+- Retirer la route API tickets
+- Car il faudrait un système JWT
+- Ne sert pas a grand chose mis à part exposer des données inutilement sans connexion utilisateur 
+
 ## [0.2.5] - 2025-10-01
 
 ### Fixes
