@@ -29,11 +29,11 @@ class SecurityController extends AbstractController
             $user = $this->userRepository->findByEmail($username);
             if($user) {
                 // On vérifie le mot de passe, avec le hash de l'utilisateur déjà enregistré
-                if (password_verify($password, $user['password'])) {
+                if (password_verify($password, $user->getPassword())) {
     
                     $_SESSION['user'] = [
                         'id' => $user->getId(),
-                        'username' => $user->getFirstname(),
+                        'firstname' => $user->getFirstname(),
                     ];
 
                     if($user->getIsadmin()) {

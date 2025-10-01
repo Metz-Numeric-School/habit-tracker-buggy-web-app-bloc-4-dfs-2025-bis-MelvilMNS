@@ -2,6 +2,12 @@
 
 ## [0.2.3] - 2025-10-01
 
+### Fixes
+
+- Corriger des problèmes de sessions, et password (user map)
+
+## [0.2.3] - 2025-10-01
+
 ### 📚 Documentation
 
 - Compléter la documentation pour le nom de domaine
