@@ -231,15 +231,17 @@ root@debian:/var/depot_git#
 
 Dans l'onglet Files de AAPanel, si vous naviguez dans le dossier du site __/www/wwwroot/172.17.4.3__ vous devriez retrouver la majeure partie du code source
 
-Etrangement il manque le dossier vendor, aucune idée du pourquoi du comment composer ne l'a pas créé
+Etrangement il manque le dossier __vendor__, aucune idée du pourquoi du comment composer ne l'a pas créé
 
-Pour palier à ce problème, j'ai décidé de me connecter en FTP via le logiciel WinSCP pour le rajouter
+Pour palier à ce problème, j'ai décidé de me connecter en __FTP__ via le logiciel __WinSCP__ pour le rajouter
 
 Putenv ne marchait toujours pas, du coup en cherchant sur Internet: https://stackoverflow.com/questions/51812996/putenv-has-been-disabled-for-security-reasons-when-executing-composer-commands
 
 Une personne recommande de retirer putenv dans disable_functions depuis le fichier __php.ini__ (que j'ai trouvé dans: __/www/server/php/83/etc/php.ini__)
 
-Maintenant c'est beaucoup mieu en executant le script __deploy.sh__:
+A priori, c'est parce que AAPanel désactive cette méthode par défaut pour des questions de sécurité
+
+Maintenant c'est beaucoup mieux en lorsque l'on execute le script __bash deploy.sh 0.0.1__:
 
 ```
 root@debian:/var/depot_git# bash deploy.sh 0.0.1
@@ -255,10 +257,25 @@ root@debian:/var/depot_git#
 
 ## Encore quelques configurations
 
-Retournez dans l'onglet Website de AAPanel, puis dans la partie Conf du site
+Retournez dans l'onglet __Website__ de __AAPanel__, puis dans la partie __Conf__ du site
 
-Allez ensuite dans l'onglet Site directory
+Allez ensuite dans l'onglet __Site directory__
 
 Changez le __Running directory__ en /public et cliquez sur __Save__.
 
-Vous pouvez fermer la modal de configuration, et tenter d'accéder au site: 
+Vous pouvez fermer la modal de configuration, et tenter d'accéder au site via l'IP http://172.17.4.3
+
+## Rajout de mon nom de domaine
+
+Pour rajouter mon nom de domaine j'ai procédé comme suit:
+
+Retournez dans l'onglet __Website__ de __AAPanel__, puis dans la partie __Conf__ du site
+
+J'ai renseigné dans l'onglet __Domain Manager__ le nom de domaine suivant: __bouron-dfsgr1.local__ et cliqué sur __Add__
+
+Maintenant j'ai les 2 options suivantes pour accéder au site
+
+```
+bouron-dfsgr1.local
+172.17.4.3
+```

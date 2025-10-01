@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.3] - 2025-10-01
+
+### 📚 Documentation
+
+- Compléter la documentation pour le nom de domaine
+
 ## [0.2.2] - 2025-10-01
 
 ### Fixes
