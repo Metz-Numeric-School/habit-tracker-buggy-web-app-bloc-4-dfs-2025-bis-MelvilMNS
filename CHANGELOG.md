@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.5] - 2025-10-01
+
+### Fixes
+
+- Ajout d'un password_hash dans le panel admin...
+
 ## [0.2.4] - 2025-10-01
 
 ### Fixes

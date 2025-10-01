@@ -48,6 +48,7 @@ class UserController extends AbstractController
             if(empty($user['password']))
                 $errors['password'] = 'Le mot de passe est obligatoire';
 
+            $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
             
             if(count($errors) == 0)
             {
