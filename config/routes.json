@@ -42,6 +42,11 @@
         "guard": "App\\Guard\\UserGuard"
     },
     {
+        "path": "/habit/toggle",
+        "controller": "App\\Controller\\Member\\HabitsController",
+        "action": "toggle"
+    },
+    {
         "path": "/habits",
         "controller": "App\\Controller\\Member\\HabitsController",
         "action": "index"

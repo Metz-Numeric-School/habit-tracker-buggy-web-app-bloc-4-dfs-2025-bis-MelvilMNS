@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.4] - 2025-10-01
+
+### Fixes
+
+- Ajouter la route pour toggle une habitude
+
 ## [0.2.3] - 2025-10-01
 
 ### Fixes
