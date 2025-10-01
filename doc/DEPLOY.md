@@ -279,3 +279,11 @@ Maintenant j'ai les 2 options suivantes pour accéder au site
 bouron-dfsgr1.local
 172.17.4.3
 ```
+
+## Mettre à jour URL Rewrite
+
+Retournez dans l'onglet __Website__, Il faut mettre sous MVC dans URL Rewrite au lieu de current, cela évite les erreurs 404
+
+## Mettre à jour le fichier .env dans l'onglet file
+
+Il faut mettre les identifiants de connexion à la base de données dans le fichier .env dans l'onglet Files
