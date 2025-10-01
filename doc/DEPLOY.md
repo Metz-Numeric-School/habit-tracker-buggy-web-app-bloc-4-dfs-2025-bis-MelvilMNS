@@ -117,13 +117,20 @@ git init --bare
 
 ## Faire le transfer depuis le repositery cloné sur notre machine en local
 
-Tout d'abord faire un nouveau commit, pour la documentation (nous pouvons pousser sur main)
+Tout d'abord faire un nouveau commit, pour la documentation
 
 Dans ce commit, nous avons des modifications dans le fichier __doc/DEPLOY.md__ ainsi que __CHANGELOG.md__
 
 Les fichiers ont été manuellement créé, mais nous pouvons aussi utiliser l'outil __git cliff__ pour générer / mettre à jour le fichier __CHANGELOG.md__
 
 Dans le CHANGELOG.md nous avons des informations avant le commit sur les changements éffectués pour une version spécifique ici __0.0.1__ (Majeur, moyenne, mineure)
+
+Maintenant pour créer le commit et le pousser sur la branche main
+```
+git add .
+git commit -m "docs: Complétion du doc/DEPLOY.md et CHANGELOG.md"
+git push -u origin main
+```
 
 Dans VSCode par exemple, à l'endroit ou est le repositery git cloné, nous pouvons créer un nouveau terminal
 
