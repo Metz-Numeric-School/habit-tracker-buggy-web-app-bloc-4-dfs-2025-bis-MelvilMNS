@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.0] - 2025-10-01
+
+### Fixes
+
+- Corriger des failles XSS
+
 ## [0.1.0] - 2025-10-01
 
 ### Fixes

@@ -41,6 +41,9 @@ class HabitsController extends AbstractController
         if (!empty($_POST['habit'])) {
             $habit = $_POST['habit'];
 
+            $habit['name'] = htmlspecialchars($habit['name']);
+            $habit['description'] = htmlspecialchars($habit['description']);
+
             if (empty($habit['name'])) {
                 $errors['name'] = 'Le nom de l’habitude est obligatoire';
             }
