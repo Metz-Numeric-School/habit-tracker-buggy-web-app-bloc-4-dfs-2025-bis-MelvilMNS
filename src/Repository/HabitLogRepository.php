@@ -1,6 +1,7 @@
 <?php
 namespace App\Repository;
 
+use App\Entity\Habit;
 use App\Entity\HabitLog;
 use App\Utils\EntityMapper;
 use Mns\Buggy\Core\AbstractRepository;
@@ -24,9 +25,13 @@ class HabitLogRepository extends AbstractRepository
 
     public function findByHabit(int $habitId)
     {
-        $sql = "SELECT * FROM habit_logs WHERE habit_id = $habitId ORDER BY log_date DESC";
-        $query = $this->getConnection()->query($sql);
-        return EntityMapper::mapCollection(HabitLog::class, $query->fetchAll());
+        $DB = $this->getConnection();
+        $SQL = "SELECT * FROM habit_logs WHERE habit_id = :habit_id ORDER BY log_date DESC";
+        $STMT = $DB->prepare($SQL);
+        $STMT->bindValue(":habit_id", $habitId);
+        $STMT->execute();
+        $habits = $STMT->fetchAll();
+        return EntityMapper::mapCollection(Habit::class, $habits);
     }
 
     public function insert(array $data = array())

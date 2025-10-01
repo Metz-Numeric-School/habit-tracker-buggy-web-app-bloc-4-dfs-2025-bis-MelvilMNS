@@ -9,28 +9,42 @@ class UserRepository extends AbstractRepository
 {
     public function findAll()
     {
-        $users = $this->getConnection()->query("SELECT * FROM mns_user");
-        return EntityMapper::mapCollection(User::class, $users->fetchAll());
+        $DB = $this->getConnection();
+        $SQL = "SELECT * FROM mns_user";
+        $STMT = $DB->prepare($SQL);
+        $STMT->execute();
+        $users = $STMT->fetchAll();
+        return EntityMapper::mapCollection(User::class, $users);
     }
 
     public function find(int $id)
     {
-        $user = $this->getConnection()->query("SELECT * FROM mns_user WHERE id = $id");
+        $DB = $this->getConnection();
+        $SQL = "SELECT * FROM mns_user WHERE id = :id";
+        $STMT = $DB->prepare($SQL);
+        $STMT->bindValue(":id", $id);
+        $STMT->execute();
+        $user = $STMT->fetch();
         return EntityMapper::map(User::class, $user);
     }
 
     public function findByEmail(string $email)
     {
-        $sql = "SELECT * FROM mns_user WHERE email = '$email'";
-        $query = $this->getConnection()->query($sql);
-        return EntityMapper::map(User::class, $query->fetch());
+        $DB = $this->getConnection();
+        $SQL = "SELECT * FROM mns_user WHERE email = :email";
+        $STMT = $DB->prepare($SQL);
+        $STMT->bindValue(":email", $email);
+        $STMT->execute();
+        $user = $STMT->fetch();
+        return EntityMapper::map(User::class, $user);
     }
 
     public function insert(array $data = array())
     {
-        $sql = "INSERT INTO mns_user (lastname, firstname, email, password, isadmin) VALUES (:lastname, :firstname, :email, :password, :isadmin)";
-        $query = $this->getConnection()->prepare($sql);
-        $query->execute($data);
+        $DB = $this->getConnection();
+        $SQL = "INSERT INTO mns_user (lastname, firstname, email, password, isadmin) VALUES (:lastname, :firstname, :email, :password, :isadmin)";
+        $STMT = $DB->prepare($SQL);
+        $STMT->execute($data);
         return $this->getConnection()->lastInsertId();
     }
 }

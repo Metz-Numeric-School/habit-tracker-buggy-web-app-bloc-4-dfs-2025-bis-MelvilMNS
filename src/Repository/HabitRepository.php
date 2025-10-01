@@ -9,21 +9,34 @@ class HabitRepository extends AbstractRepository
 {
     public function findAll()
     {
-        $habits = $this->getConnection()->query("SELECT * FROM habits");
-        return EntityMapper::mapCollection(Habit::class, $habits->fetchAll());
+        $DB = $this->getConnection();
+        $SQL = "SELECT * FROM habits";
+        $STMT = $DB->prepare($SQL);
+        $STMT->execute();
+        $habits = $STMT->fetchAll();
+        return EntityMapper::mapCollection(Habit::class, $habits);
     }
 
     public function find(int $id)
     {
-        $habit = $this->getConnection()->query("SELECT * FROM habits WHERE id = $id");
-        return EntityMapper::map(Habit::class, $habit->fetch());
+        $DB = $this->getConnection();
+        $SQL = "SELECT * FROM habits WHERE id = :id";
+        $STMT = $DB->prepare($SQL);
+        $STMT->bindValue(":id", $id);
+        $STMT->execute();
+        $habit = $STMT->fetch();
+        return EntityMapper::map(Habit::class, $habit);
     }
 
     public function findByUser(int $userId)
     {
-        $sql = "SELECT * FROM habits WHERE user_id = $userId";
-        $query = $this->getConnection()->query($sql);
-        return EntityMapper::mapCollection(Habit::class, $query->fetchAll());
+        $DB = $this->getConnection();
+        $SQL = "SELECT * FROM habits WHERE user_id = :user_id";
+        $STMT = $DB->prepare($SQL);
+        $STMT->bindValue(":user_id", $userId);
+        $STMT->execute();
+        $habits = $STMT->fetchAll();
+        return EntityMapper::mapCollection(Habit::class, $habits);
     }
 
      /**
@@ -38,19 +51,15 @@ class HabitRepository extends AbstractRepository
     }
 
     public function insert(array $data = array())
-    {
-        $name = $data['name'];   
-        $description = $data['description'];
-
-        // Requête construite par concaténation (vulnérable)
-        $sql = "INSERT INTO habits (user_id, name, description, created_at) VALUES (" 
-            . $data['user_id'] . ", '" 
-            . $name . "', '" 
-            . $description . "', NOW())";
-
-        $query = $this->getConnection()->query($sql);
-
-        return $this->getConnection()->lastInsertId();
+    {   
+        $DB = $this->getConnection();
+        $SQL = "INSERT INTO habits (user_id, name, description, created_at) VALUES (:user_id, :name, :description, NOW())";
+        $STMT = $DB->prepare($SQL);
+        $STMT->bindValue(":user_id", $data['user_id']);
+        $STMT->bindValue(":name", $data['name']);
+        $STMT->bindValue(":description", $data['description']);
+        $STMT->execute();
+        return $DB->lastInsertId();
     }
 
     /**
